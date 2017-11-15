@@ -1,7 +1,7 @@
 clone:
   git:
     image: plugins/git
-    depth: 50
+    depth: 1
     tags: true
 
 pipeline:
@@ -27,15 +27,6 @@ pipeline:
       - php artisan key:generate
       - php artisan migrate
       - ./vendor/bin/phpunit
-
-  fb:
-    image: appleboy/drone-facebook
-    pull: true
-    secrets: [ fb_page_token, fb_verify_token ]
-    to: 1234973386524610
-    when:
-      event: [ push, pull_request ]
-      status: [ success, failure ]
 
 services:
   elasticsearch:
